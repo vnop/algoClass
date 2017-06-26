@@ -62,29 +62,31 @@ Stack.prototype.push = function(value) {
     this.size++;
     return this.size;
   } else {
-    return 'Max capacity already reached. Remove element before adding a new one.';
+    return console.log('Max capacity already reached. Remove element before adding a new one.');
   }
 };
 // Time complexity:
 
 Stack.prototype.pop = function() {
-  this.size--;
-  let popItem = this.storage[this.size];
-  delete this.storage[this.size];
-  return popItem;
+  if (this.size > 0) {
+    this.size--;
+    let popItem = this.storage[this.size];
+    delete this.storage[this.size];
+    return popItem;
+  }
 };
 // Time complexity:
 
 Stack.prototype.peek = function() {
-  // implement me...
+  let peekSize = this.size - 1;
+  return this.storage[peekSize];
 };
 // Time complexity:
 
 Stack.prototype.count = function() {
-  // implement me...
+  return this.size;
 };
 // Time complexity:
-
 
 /*
 *** Exercises:
