@@ -88,6 +88,31 @@ Stack.prototype.count = function() {
 };
 // Time complexity:
 
+Stack.prototype.contains = function(value) {
+  // constraint: no use of Arrays
+  let result = false;
+  for (let i = 0; i < this.size; i++) {
+    if (this.storage[i] === value) {
+      result = true;
+      break;
+    }
+  }
+  return result;
+};
+// Time complexity:
+
+Stack.prototype.until = function(value) {
+  let result = 0;
+  for (let i = this.size - 1; i >= 0; i--) {
+    result++;
+    if (this.storage[i] === value) {
+      break;
+    }
+  }
+  return result;
+};
+// Time complexity:
+
 /*
 *** Exercises:
 
