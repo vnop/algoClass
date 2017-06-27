@@ -51,16 +51,34 @@ What's the time complexity?
  */
 
 function Queue(capacity) {
-  // implement me...
+  this.max = capacity;
+  this.front = 0;
+  this.back = 0;
+  this.storage = {};
 }
 
 Queue.prototype.enqueue = function(value) {
-  // implement me...
+  let size = this.front + this.back;
+  if (size < this.max) {
+    this.storage[size] = value;
+    this.back++;
+    return this.front + this.back;
+  }
 };
 // Time complexity:
 
 Queue.prototype.dequeue = function() {
-  // implement me...
+  let size = this.back + this.front;
+  if (size > 0) {
+    let temp = this.storage[size];
+    delete this.storage[-this.front];
+    this.front--;
+    if (this.front + this.back === 0) {
+      this.front = 0;
+      this.back = 0;
+    }
+    return temp;
+  }
 };
 // Time complexity:
 
@@ -73,7 +91,21 @@ Queue.prototype.count = function() {
 };
 // Time complexity:
 
-
+let test = new Queue(8);
+test.enqueue(1);
+test.enqueue(2);
+test.dequeue();
+test.enqueue(3);
+test.enqueue(4);
+// test.dequeue();
+// test.dequeue();
+// test.dequeue();
+// test.dequeue();
+// test.enqueue(1);
+// test.enqueue(2);
+// test.enqueue(3);
+// test.enqueue(4);
+console.log(test);
 
 /*
 *** Exercises:

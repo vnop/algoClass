@@ -62,10 +62,10 @@ Stack.prototype.push = function(value) {
     this.size++;
     return this.size;
   } else {
-    return console.log('Max capacity already reached. Remove element before adding a new one.');
+    return 'Max capacity already reached. Remove element before adding a new one.';
   }
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.pop = function() {
   if (this.size > 0) {
@@ -75,18 +75,18 @@ Stack.prototype.pop = function() {
     return popItem;
   }
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.peek = function() {
   let peekSize = this.size - 1;
   return this.storage[peekSize];
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.count = function() {
   return this.size;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Stack.prototype.contains = function(value) {
   // constraint: no use of Arrays
@@ -99,7 +99,7 @@ Stack.prototype.contains = function(value) {
   }
   return result;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 Stack.prototype.until = function(value) {
   let result = 0;
@@ -111,7 +111,7 @@ Stack.prototype.until = function(value) {
   }
   return result;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 /*
 *** Exercises:
