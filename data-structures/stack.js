@@ -115,19 +115,73 @@ Stack.prototype.until = function(value) {
 
 /*
 *** Exercises:
+*/
 
-1. Implement a stack with a min method which returns the minimum element currently in the stack. This method should have O(1) time complexity. Make sure your implementation handles duplicates.
+// 1. Implement a stack with a min method which returns the minimum element currently in the stack. This method should have O(1) time complexity. Make sure your implementation handles duplicates.
 
-2. Sort a stack so that its elements are in ascending order.
+var minStack = function(capacity) {
+  this.storage = {};
+  this.size = 0;
+  this.min = null;
+  this.max = capacity;
+};
 
-3. Given a string, determine if the parenthesis in the string are balanced.
-Ex: balancedParens( 'sqrt(5*(3+8)/(4-2))' ) => true
-Ex: balancedParens( 'Math.min(5,(6-3))(' ) => false
+minStack.prototype.push = function(value) {
+  if (this.size < this.max) {
+    this.storage[this.size] = value;
+    this.size++;
+    if (value < this.min) {
+      this.min = value;
+    } else if (this.min === null) {
+      this.min = value;
+    }
+    return this.size;
+  } else {
+    return 'Max capacity already reached. Remove element before adding a new one.';
+  }
+};
 
-4. Towers of Hanoi - https://en.wikipedia.org/wiki/Tower_of_Hanoi
-You are given three towers (stacks) and N disks, each of different size. You can move the disks according to three constraints:
-   1. only one disk can be moved at a time
-   2. when moving a disk, you can only use pop (remove the top element) and push (add to the top of a stack)
-   3. no disk can be placed on top of a disk that is smaller than it
-The disks begin on tower#1. Write a function that will move the disks from tower#1 to tower#3 in such a way that none of the constraints are violated.
- */
+minStack.prototype.pop = function() {
+  if (this.size > 0) {
+    this.size--;
+    let popItem = this.storage[this.size];
+    delete this.storage[this.size];
+    if (this.min === popItem) {
+      let newMin = findMin(this);
+      this.min = newMin;
+    }
+    return popItem;
+  }
+};
+
+minStack.prototype.min = function() {
+  return this.min;
+};
+
+function findMin(stack) {
+  let result = null;
+  for (let i = 0; i < stack.size; i++) {
+    if (i === 0) {
+      result = stack.storage[i];
+    } else {
+      if (stack.storage[i] < result) {
+        result = stack.storage[i];
+      }
+    }
+  }
+  return result;
+};
+
+// 2. Sort a stack so that its elements are in ascending order.
+
+// 3. Given a string, determine if the parenthesis in the string are balanced.
+// Ex: balancedParens( 'sqrt(5*(3+8)/(4-2))' ) => true
+// Ex: balancedParens( 'Math.min(5,(6-3))(' ) => false
+
+// 4. Towers of Hanoi - https://en.wikipedia.org/wiki/Tower_of_Hanoi
+// You are given three towers (stacks) and N disks, each of different size. You can move the disks according to three constraints:
+//    1. only one disk can be moved at a time
+//    2. when moving a disk, you can only use pop (remove the top element) and push (add to the top of a stack)
+//    3. no disk can be placed on top of a disk that is smaller than it
+// The disks begin on tower#1. Write a function that will move the disks from tower#1 to tower#3 in such a way that none of the constraints are violated.
+
