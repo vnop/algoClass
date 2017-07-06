@@ -51,61 +51,70 @@ What's the time complexity?
  */
 
 function Queue(capacity) {
-  this.max = capacity;
-  this.front = 0;
-  this.back = 0;
-  this.storage = {};
+  this._max = capacity;
+  this._storage = {};
+  this._front = 0;
+  this._back = 0;
 }
 
 Queue.prototype.enqueue = function(value) {
-  let size = this.front + this.back;
-  if (size < this.max) {
-    this.storage[size] = value;
-    this.back++;
-    return this.front + this.back;
+  let size = this._back - this._front;
+  if (size < this._max) {
+    this._storage[this._back++] = value;
+    return this._back - this._front;
+  } else {
+    return 'Max capacity already reached. Remove element before adding a new one.';
   }
 };
 // Time complexity:
 
 Queue.prototype.dequeue = function() {
-  let size = this.back + this.front;
+  let size = this._back - this._front;
   if (size > 0) {
-    let temp = this.storage[size];
-    delete this.storage[-this.front];
-    this.front--;
-    if (this.front + this.back === 0) {
-      this.front = 0;
-      this.back = 0;
-    }
-    return temp;
+    let dequeueItem = this._storage[this._front];
+    delete this._storage[this._front++];
+    return dequeueItem;
   }
 };
 // Time complexity:
 
 Queue.prototype.peek = function() {
-  // implement me...
+  let size = this._back - this._front;
+  if (size > 0) {
+    return this._storage[this._front];
+  } else {
+    return 'Queue is empty.';
+  }
 };
 
 Queue.prototype.count = function() {
-  // implement me...
+  return this._back - this._front;
 };
 // Time complexity:
 
-let test = new Queue(8);
-test.enqueue(1);
-test.enqueue(2);
-test.dequeue();
-test.enqueue(3);
-test.enqueue(4);
-// test.dequeue();
-// test.dequeue();
-// test.dequeue();
-// test.dequeue();
-// test.enqueue(1);
-// test.enqueue(2);
-// test.enqueue(3);
-// test.enqueue(4);
-console.log(test);
+Queue.prototype.contains = function(value) {
+  let result = false;
+  for (let i = this._front; i < this._back; i++) {
+    if (this._storage[i] === value) {
+      return true;
+    }
+  }
+  return result;
+};
+// Time complexity:
+
+Queue.prototype.until = function(value) {
+  let result = null;
+  let count = 0;
+  for (let i = this._front; i < this._back; i++) {
+    count++;
+    if (this._storage[i] === value) {
+      return count;
+    }
+  }
+  return result;
+};
+// Time complexity:
 
 /*
 *** Exercises:
