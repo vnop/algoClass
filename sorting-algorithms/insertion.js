@@ -29,3 +29,24 @@ now repeat for next unsorted element
 (https://en.wikipedia.org/wiki/Shellsort)
 
 */
+
+var insertionSort = function(array) {
+  for (let i = 0; i < array.length; i++) {
+    let current = array[i];
+    let previous = array[i - 1];
+    if (previous > current) {
+      array[i] = previous;
+      array[i - 1] = current;
+      for (let j = i - 1; j > 0; j--) {
+        let current = array[j];
+        let previous = array[j - 1];
+        if (previous > current) {
+          array[j] = previous;
+          array[j - 1] = current;
+        }
+      }
+    }
+  }
+  return array;
+};
+// Time complexity: O(n^2)
