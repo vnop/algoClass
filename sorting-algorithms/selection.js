@@ -28,3 +28,55 @@ Stable Variant
 - Implement selection sort for a linked list (you can use your data structure implemention from earlier in the course). How does this impact performance and stability?
 
 */
+
+// var selectionSort = function(array) {
+//   let sortedArray = [];
+//   let unsortedArray = [];
+//   for (let i = 0; i < array.length; i++) {
+//     let current = array[i];
+//     let previous = array[i - 1];
+//     if (current < previous) {
+//       sortedArray = array.slice(0, i - 1);
+//       unsortedArray = array.slice(i - 1);
+//       break;
+//     }
+//   }
+//   while (unsortedArray.length > 0) {
+//     let min = unsortedArray.indexOf(Math.min(...unsortedArray));
+//     sortedArray.push(unsortedArray.splice(min, 1)[0]);
+//   }
+//   return sortedArray;
+// };
+// Time complexity: O(n^2)
+
+var selectionSort = function(array, comparator) {
+  comparator = comparator || defaultComparator;
+  array.forEach(function(element, index) {
+    let minValue = element;
+    let minIndex = index;
+    for (let i = index; i < array.length; i++) {
+      if (comparator(array[i], minValue) < 0) {
+        minValue = array[i];
+        minIndex = i;
+      }
+    }
+    array = swap(array, index, minIndex);
+  });
+  return array;
+};
+
+function swap (arr, i1, i2) {
+  let temp = arr[i1];
+  arr[i1] = arr[i2];
+  arr[i2] = temp;
+  return arr;
+}
+
+function defaultComparator (a, b) {
+  if (a < b) {
+    return -1;
+  } else if (a > b) {
+    return 1;
+  }
+  return 0;
+}
