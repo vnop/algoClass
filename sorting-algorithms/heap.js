@@ -117,3 +117,22 @@ Heap.prototype.removeMax = function() {
   // Return the removed max value from the heap
   return maxValue;
 };
+
+// HEAPSORT
+function heapSort(arr) {
+  // create a heap
+  var heap = new Heap();
+  // iterate over input array and add values to heap
+  arr.forEach(heap.insert.bind(heap));
+  // remove max value from heap until empty
+  var result = [];
+  while (heap.storage.length) {
+    result.push(heap.removeMax());
+  }
+  // reverse the result array to sort from smallest to largest
+  return result.reduceRight(function(acc, val) {
+    acc.push(val);
+    return acc;
+  }, []);
+}
+console.log(heapSort([1,2,5,9,4,1,6,3]));
