@@ -93,7 +93,7 @@ function LinkedList(headValue) {
 
 LinkedList.prototype.forEach = function(callback) {
   let node = this.head;
-  while (node.value !== null) {
+  while (node) {
     callback(node.value);
     node = node.next;
   }
@@ -103,7 +103,7 @@ LinkedList.prototype.forEach = function(callback) {
 LinkedList.prototype.print = function() {
   let node = this.head;
   let result = '';
-  while (node.value !== null) {
+  while (node) {
     result += node.value;
     node = node.next;
   }
@@ -147,7 +147,7 @@ LinkedList.prototype.removeHead = function() {
 
 LinkedList.prototype.findNode = function(value) {
   let node = this.head;
-  while (node.value !== null) {
+  while (node) {
     if (node.value === value) {
       return node;
     }
@@ -172,7 +172,7 @@ LinkedList.prototype.removeTail = function() {
     this.head = null;
   }
   let node = this.head;
-  while (node.value !== null) {
+  while (node) {
     if (node.next.next === null) {
       this.tail = node;
       this.tail.next = null;
